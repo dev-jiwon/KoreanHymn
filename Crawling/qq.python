@@ -1,0 +1,18 @@
+import json
+from collections import OrderedDict
+
+aa = []
+
+one_of_data = OrderedDict()
+one_of_data["itenIndex"] = 'hh'
+one_of_data["title"] = 'bbb'
+
+aa.append(one_of_data)
+
+one_of_data = OrderedDict()
+one_of_data["itenIndex"] = 'qq'
+one_of_data["title"] = 'bbaq'
+
+aa.append(one_of_data)
+
+print(json.dumps(aa, ensure_ascii=False, indent="\t") )
