@@ -5,21 +5,33 @@ for index in range(520, 529):
 	url = 'http://maria.catholic.or.kr/sungga/search/sungga_view.asp?ctxtIndex=' + str(index)
 	try:
 		req = requests.get(url)
-		req = requests.get(url)
 		req.raise_for_status()
 		req.encoding=None   # None 으로 설정
 		html = req.text
 		soup = BeautifulSoup(html, 'html.parser')
-		# CSS Selector를 통해 html요소들을 찾아낸다.
 		my_titles = soup.select(
 			' table > tbody > tr > td '
 		)
-		print(my_titles[0].text)
-		print(my_titles[1].text)
-		print(my_titles[2].text)
-		print(my_titles[3].text)
-		print(my_titles[6].text)
-		print(my_titles[10].text.strip()) #strip을 이용해서 앞 뒤 빈공간 지우기
-		print('')
+		print(my_titles[0].text)  #번호
+		print(my_titles[1].text)  #제목
+		print(my_titles[2].text)  #전례
+		print(my_titles[3].text)  #형식
+		print(my_titles[6].text)  #작곡가
+		print(my_titles[10].text.strip()) #가사(strip을 이용해서 앞 뒤 빈공간 지우기)
+
+		my_titles = soup.select(
+                        ' table > tbody > tr > td > span > a '
+                )
+		num_of_list = len(my_titles) - 1
+		music_type = my_titles[num_of_list].text
+		if (music_type == ' MP3'):
+			print(my_titles[num_of_list].get('href')[21:31])  #mp3링크
+		else:
+			print('준비중입니다')  #mp3링크 없을때
+		my_titles = soup.select(
+			' table > tbody > tr > td > a '
+		)
+		print(my_titles[0].get('href')[22:32]) #혼성
+		print(my_titles[1].get('href')[22:32]) #단성
 	except:
 		continue
