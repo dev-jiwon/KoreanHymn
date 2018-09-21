@@ -1,0 +1,25 @@
+import requests
+from bs4 import BeautifulSoup
+
+for index in range(520, 529):
+	url = 'http://maria.catholic.or.kr/sungga/search/sungga_view.asp?ctxtIndex=' + str(index)
+	try:
+		req = requests.get(url)
+		req = requests.get(url)
+		req.raise_for_status()
+		req.encoding=None   # None 으로 설정
+		html = req.text
+		soup = BeautifulSoup(html, 'html.parser')
+		# CSS Selector를 통해 html요소들을 찾아낸다.
+		my_titles = soup.select(
+			' table > tbody > tr > td '
+		)
+		print(my_titles[0].text)
+		print(my_titles[1].text)
+		print(my_titles[2].text)
+		print(my_titles[3].text)
+		print(my_titles[6].text)
+		print(my_titles[10].text.strip()) #strip을 이용해서 앞 뒤 빈공간 지우기
+		print('')
+	except:
+		continue

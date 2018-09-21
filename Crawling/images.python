@@ -1,0 +1,20 @@
+import requests
+from bs4 import BeautifulSoup
+
+for index in range(520, 529):
+	url = 'http://maria.catholic.or.kr/sungga/search/sungga_view.asp?ctxtIndex=' + str(index)
+	try:
+		req = requests.get(url)
+		req.raise_for_status()
+		req.encoding=None   # None 으로 설정
+		html = req.text
+		soup = BeautifulSoup(html, 'html.parser')
+		# CSS Selector를 통해 html요소들을 찾아낸다.
+		my_titles = soup.select(
+			' table > tbody > tr > td > a '
+		)
+		print(my_titles[0].get('href')[22:32]) #혼성
+		print(my_titles[1].get('href')[22:32]) #단성
+		print('')
+	except:
+		continue
