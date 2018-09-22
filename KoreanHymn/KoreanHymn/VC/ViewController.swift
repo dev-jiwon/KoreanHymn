@@ -54,7 +54,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let musicDetailViewController = storyboard.instantiateViewController(withIdentifier: "MusicDetailViewController") as! MusicDetailViewController
+        
+        musicDetailViewController.isItSpecialList = listButton.isEnabled
+        musicDetailViewController.itemIndex = indexPath.row
+        
+        show(musicDetailViewController, sender: nil)
     }
     
     @IBAction func someMenuSelected(_ sender: UIButton) {
