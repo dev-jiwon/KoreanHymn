@@ -18,7 +18,7 @@ for index in range(1, 529):
 		my_titles = soup.select(
 			' table > tbody > tr > td '
 		)
-		one_of_data["itenIndex"] = my_titles[0].text
+		one_of_data["itemIndex"] = my_titles[0].text
 		one_of_data["title"] = my_titles[1].text
 		one_of_data["typeOfMusic1"] = my_titles[2].text
 		one_of_data["typeOfMusic2"] = my_titles[3].text
