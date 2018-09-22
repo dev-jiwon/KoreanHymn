@@ -14,6 +14,7 @@
 		131AC6902155DD3B00CA3525 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 131AC68E2155DD3B00CA3525 /* LaunchScreen.storyboard */; };
 		131AC69A2155EE6B00CA3525 /* musicList.json in Resources */ = {isa = PBXBuildFile; fileRef = 131AC6992155EE6B00CA3525 /* musicList.json */; };
 		131AC69C2155F06000CA3525 /* MusicInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131AC69B2155F06000CA3525 /* MusicInfoModel.swift */; };
+		13330631215616C900D734D6 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13330630215616C900D734D6 /* MainTableViewCell.swift */; };
 		4F5DE3BA6677DEEFC20965DF /* Pods_KoreanHymn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BC357E8493D801027BE4FAA /* Pods_KoreanHymn.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		131AC6912155DD3B00CA3525 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		131AC6992155EE6B00CA3525 /* musicList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = musicList.json; path = ../../Crawling/musicList.json; sourceTree = "<group>"; };
 		131AC69B2155F06000CA3525 /* MusicInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInfoModel.swift; sourceTree = "<group>"; };
+		13330630215616C900D734D6 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		3D1DD28BE3CB230D6FA9A286 /* Pods-KoreanHymn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KoreanHymn.release.xcconfig"; path = "Pods/Target Support Files/Pods-KoreanHymn/Pods-KoreanHymn.release.xcconfig"; sourceTree = "<group>"; };
 		7BC357E8493D801027BE4FAA /* Pods_KoreanHymn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KoreanHymn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAD1E1EAE0545BA03C7383D0 /* Pods-KoreanHymn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KoreanHymn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KoreanHymn/Pods-KoreanHymn.debug.xcconfig"; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 		131AC69E2155F1AF00CA3525 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				13330630215616C900D734D6 /* MainTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 			files = (
 				131AC69C2155F06000CA3525 /* MusicInfoModel.swift in Sources */,
 				131AC6882155DD3800CA3525 /* ViewController.swift in Sources */,
+				13330631215616C900D734D6 /* MainTableViewCell.swift in Sources */,
 				131AC6862155DD3800CA3525 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

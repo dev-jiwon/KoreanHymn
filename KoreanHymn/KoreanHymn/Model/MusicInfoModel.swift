@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 class MusicInfoModel: Object {
-    @objc dynamic var itemIndex : String = ""
+    @objc dynamic var itemIndex : Int = 0
     @objc dynamic var title : String = ""
     @objc dynamic var typeOfMusic1: String = ""
     @objc dynamic var typeOfMusic2: String = ""
@@ -19,11 +19,11 @@ class MusicInfoModel: Object {
     @objc dynamic var mp3UrlNum: String = ""
     @objc dynamic var pianoScore1: String = ""
     @objc dynamic var pianoScore2: String = ""
-    
+    @objc dynamic var isItLike: Bool = false
     
 }
 
-public func addItem(itemIndex: String, title: String, typeOfMusic1: String, typeOfMusic2: String, songwriter: String, lyrics: String, mp3UrlNum: String, pianoScore1: String, pianoScore2: String) {
+public func addItem(itemIndex: Int, title: String, typeOfMusic1: String, typeOfMusic2: String, songwriter: String, lyrics: String, mp3UrlNum: String, pianoScore1: String, pianoScore2: String) {
     let musicInfoModel = MusicInfoModel()
     musicInfoModel.itemIndex = itemIndex
     musicInfoModel.title = title

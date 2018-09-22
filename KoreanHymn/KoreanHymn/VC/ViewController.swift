@@ -12,18 +12,47 @@ import Realm
 import RealmSwift
 
 class ViewController: UIViewController {
-
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         addAllOfItems()
-        
+        tableView.delegate = self
+        tableView.dataSource = self
         
     }
-
-
 }
 
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let realm = try! Realm()
+        let musicData = realm.objects(MusicInfoModel.self).sorted(byKeyPath: "itemIndex", ascending: true)
+        return musicData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let realm = try! Realm()
+        let musicData = realm.objects(MusicInfoModel.self).sorted(byKeyPath: "itemIndex", ascending: true)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MainTableViewCell", for: indexPath) as! MainTableViewCell
+        let nowMusic = musicData[indexPath.row]
+        cell.titleLabel.text = "\(nowMusic.itemIndex).  \(nowMusic.title)"
+        cell.isItLike = nowMusic.isItLike
+        cell.itemIndex = indexPath.row
+//        if nowMusic.isItLike {
+//            cell.likeButton.setImage(UIImage(named: "heart_selected"), for: .normal)
+//        } else {
+//            cell.likeButton.setImage(UIImage(named: "heart"), for: .normal)
+//        }
+        
+        return cell
+    }
+    
+    
+}
+
+
+//json의 모든 데이터를 Realm에 저장
 extension ViewController {
     func addAllOfItems() {
         let realm = try! Realm()
@@ -35,7 +64,7 @@ extension ViewController {
                     let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
                     if let jsonResult = jsonResult as? [Dictionary<String, String>] {
                         for item in jsonResult{
-                            addItem(itemIndex: item["itemIndex"] ?? "",
+                            addItem(itemIndex: Int(item["itemIndex"] ?? "0") ?? 0,
                                     title: item["title"] ?? "",
                                     typeOfMusic1: item["typeOfMusic1"] ?? "",
                                     typeOfMusic2: item["typeOfMusic2"] ?? "",
@@ -53,23 +82,5 @@ extension ViewController {
         } else {
             print("데이터가 이미 있습니다")
         }
-    }
-    
-    func addItem(itemIndex: String, title: String, typeOfMusic1: String, typeOfMusic2: String, songwriter: String, lyrics: String, mp3UrlNum: String, pianoScore1: String, pianoScore2: String) {
-        let musicInfoModel = MusicInfoModel()
-        musicInfoModel.itemIndex = itemIndex
-        musicInfoModel.title = title
-        musicInfoModel.typeOfMusic1 = typeOfMusic1
-        musicInfoModel.typeOfMusic2 = typeOfMusic2
-        musicInfoModel.songwriter = songwriter
-        musicInfoModel.lyrics = lyrics
-        musicInfoModel.mp3UrlNum = mp3UrlNum
-        musicInfoModel.pianoScore1 = pianoScore1
-        musicInfoModel.pianoScore2 = pianoScore2
-        let realm = try! Realm()
-        try! realm.write {
-            realm.add(musicInfoModel)
-        }
-        print("success")
     }
 }
