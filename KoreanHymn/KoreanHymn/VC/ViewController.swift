@@ -13,6 +13,8 @@ import RealmSwift
 
 class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var listButton: UIButton!
+    @IBOutlet weak var heartButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,27 +29,39 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let realm = try! Realm()
-        let musicData = realm.objects(MusicInfoModel.self).sorted(byKeyPath: "itemIndex", ascending: true)
+        var musicData = realm.objects(MusicInfoModel.self).sorted(byKeyPath: "itemIndex", ascending: true)
+        if listButton.isEnabled {
+            musicData = realm.objects(MusicInfoModel.self).sorted(byKeyPath: "itemIndex", ascending: true).filter("isItLike = true")
+        }
+        
         return musicData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let realm = try! Realm()
-        let musicData = realm.objects(MusicInfoModel.self).sorted(byKeyPath: "itemIndex", ascending: true)
+        var musicData = realm.objects(MusicInfoModel.self).sorted(byKeyPath: "itemIndex", ascending: true)
+        if listButton.isEnabled {
+            musicData = realm.objects(MusicInfoModel.self).sorted(byKeyPath: "itemIndex", ascending: true).filter("isItLike = true")
+        }
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainTableViewCell", for: indexPath) as! MainTableViewCell
         let nowMusic = musicData[indexPath.row]
         cell.titleLabel.text = "\(nowMusic.itemIndex).  \(nowMusic.title)"
         cell.isItLike = nowMusic.isItLike
         cell.itemIndex = indexPath.row
-//        if nowMusic.isItLike {
-//            cell.likeButton.setImage(UIImage(named: "heart_selected"), for: .normal)
-//        } else {
-//            cell.likeButton.setImage(UIImage(named: "heart"), for: .normal)
-//        }
         
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+    }
+    
+    @IBAction func someMenuSelected(_ sender: UIButton) {
+        listButton.isEnabled = !listButton.isEnabled
+        heartButton.isEnabled = !heartButton.isEnabled
+        tableView.reloadData()
+    }
     
 }
 
